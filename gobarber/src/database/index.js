@@ -2,10 +2,11 @@ import Sequelize from 'sequelize';
 
 import databaseConfig from '../config/database';
 
+import Appointment from '../app/models/Appointment';
 import File from '../app/models/File';
 import User from '../app/models/User';
 
-const models = [User, File];
+const models = [User, File, Appointment];
 
 class Database {
   constructor() {
@@ -17,7 +18,7 @@ class Database {
 
     models
       .map(model => model.init(this.connection))
-      .map(model => model.associete && model.associete(this.connection.models));
+      .map(model => model.associate && model.associate(this.connection.models));
   }
 }
 
