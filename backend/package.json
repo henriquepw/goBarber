@@ -5,11 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
+    "queue": "nodemon src/queue.js",
     "fix": "yarn eslint --fix src --ext .js",
     "migrate": "yarn sequelize db:migrate"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.2.2",
     "date-fns": "^2.0.0-beta.2",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
