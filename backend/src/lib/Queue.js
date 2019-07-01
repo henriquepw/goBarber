@@ -33,7 +33,8 @@ class Queue {
   }
 
   handleFailed(job, err) {
-    console.log(`Queue ${job.queue.name}: FAILED`, err);
+    const { log } = console;
+    log(`Queue ${job.queue.name}: FAILED`, err);
   }
 }
 
