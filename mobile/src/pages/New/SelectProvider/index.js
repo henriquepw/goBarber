@@ -5,9 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '~/services/api';
 import Background from '~/components/Background';
 
-import { Container } from './styles';
+import { Container, ProvidersList, Provider, Avatar, Name } from './styles';
 
-export default function SelectProvider() {
+export default function SelectProvider({ navigation }) {
   const [providers, setProviders] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function SelectProvider() {
     }
 
     loadProviders();
-  });
+  }, []);
 
   return (
     <Background>
@@ -27,12 +27,16 @@ export default function SelectProvider() {
           data={providers}
           keyExtractor={provider => String(provider.id)}
           renderItem={({ item }) => (
-            <Provider>
+            <Provider
+              onPress={() =>
+                navigation.navigate('SelectDateTime', { provider: item })
+              }
+            >
               <Avatar
                 source={{
                   uri: item.avatar
                     ? item.avatar.url
-                    : `https://api.adorable.io/avatar/50/${item.name}.png`,
+                    : `https://api.adorable.io/avatar/300/${item.name}.png`,
                 }}
               />
               <Name>{item.name}</Name>
