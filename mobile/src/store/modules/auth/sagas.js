@@ -1,8 +1,7 @@
+import { Alert } from 'react-native';
 import { all, takeLatest, call, put } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
 
 import api from '~/services/api';
-import history from '~/services/history';
 
 import { signInSuccess, signFailure } from './actions';
 
@@ -15,8 +14,12 @@ export function* signIn({ payload }) {
 
     const { token, user } = res.data;
 
-    if (!user.provider) {
-      toast.error('User is not provider');
+    if (user.provider) {
+      Alert.alert(
+        'Erro no login',
+        'O Usuário não pode ser prestador de serviços'
+      );
+
       return;
     }
 
@@ -24,9 +27,13 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    history.push('/dashboard');
+    // history.push('/dashboard');
   } catch (err) {
-    toast.error('Authentication failed, check your data');
+    Alert.alert(
+      'Falha na autenticação',
+      'Houve um erro no login, verifique seu dados'
+    );
+
     yield put(signFailure());
   }
 }
@@ -35,12 +42,15 @@ export function* signUp({ payload }) {
   try {
     yield call(api.post, 'users', {
       ...payload,
-      provider: true,
     });
 
-    history.push('/');
+    // history.push('/');
   } catch (err) {
-    toast.error('Register failed, check your data');
+    Alert.alert(
+      'Falha na cadastro',
+      'Houve um erro no cadastro, verifique seu dados'
+    );
+
     yield put(signFailure());
   }
 }
@@ -53,12 +63,8 @@ export function setToken({ payload }) {
   if (token) api.defaults.headers.Authorization = `Bearer ${token}`;
 }
 
-export function signOut() {
-  history.push('/');
-}
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_UP_REQUEST', signUp),
-  takeLatest('@auth/SIGN_OUT', signOut),
 ]);
