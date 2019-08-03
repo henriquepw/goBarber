@@ -11,6 +11,11 @@ import SessionController from './app/controllers/SessionController';
 import ScheduleController from './app/controllers/ScheduleController';
 import NotificationController from './app/controllers/NotificationController';
 
+import validadeAppointmentStore from './app/validators/AppointmentStore';
+import validadeSessionStore from './app/validators/SessionStore';
+import validadeUserStore from './app/validators/UserStore';
+import validadeUserUpdate from './app/validators/UserUpdate';
+
 import authMiddware from './app/middwares/auth';
 
 const routes = new Router();
@@ -18,12 +23,12 @@ const upload = multer(multerConfig);
 
 routes.get('/', async (_, res) => res.send('Wellcome gobaber'));
 
-routes.post('/session', SessionController.store);
-routes.post('/users', UserController.store);
+routes.post('/session', validadeSessionStore, SessionController.store);
+routes.post('/users', validadeUserStore, UserController.store);
 
 routes.use(authMiddware);
 
-routes.put('/users', UserController.update);
+routes.put('/users', validadeUserUpdate, UserController.update);
 
 routes.get('/providers', ProviderController.index);
 routes.get('/providers/:providerId/available', AvailableController.index);
@@ -31,7 +36,7 @@ routes.get('/providers/:providerId/available', AvailableController.index);
 routes
   .route('/appointments')
   .get(AppointmentController.index)
-  .post(AppointmentController.store);
+  .post(validadeAppointmentStore, AppointmentController.store);
 
 routes.delete('/appointments/:id', AppointmentController.delete);
 
