@@ -44,7 +44,7 @@ class App {
           ? await new Youch(err, req).toJSON()
           : { error: 'Internal server error' };
 
-      return res.status(500).json(errors);
+      return res.status(err.status || 500).json(errors);
     });
   }
 }
