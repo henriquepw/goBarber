@@ -6,6 +6,8 @@ import Appointment from '../models/Appointment';
 
 import Notification from '../schemas/Notification';
 
+import Cache from '../../lib/Cache';
+
 class AppointmentError extends Error {
   constructor(status, ...args) {
     super(...args);
@@ -83,6 +85,11 @@ class CreateAppointmentService {
       content: `Novo agendamento de ${user.name} para ${formattedDate}`,
       user: provider_id,
     });
+
+    /**
+     * Invalidade cache
+     */
+    await Cache.invalidatePrefix(`user:${user_id}:appointments`);
 
     return appointment;
   }
