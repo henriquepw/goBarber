@@ -14,7 +14,6 @@ import { utcToZonedTime } from 'date-fns-tz';
 import pt from 'date-fns/locale/pt';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
-import { textInputs } from 'polished';
 import api from '~/services/api';
 
 import { Container, Time } from './styles';
