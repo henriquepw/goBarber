@@ -1,21 +1,39 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
-export const Container = styled.div`
+interface ContainerProps {
+  isFocused: boolean;
+  isFilled: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
 
+  color: ${({ theme }) => theme.colors.placeHolder};
   background: ${({ theme }) => theme.colors.secundaryBackground};
   border: 2px solid ${({ theme }) => theme.colors.secundaryBackground};
   border-radius: 10px;
 
   width: 100%;
-
   padding: 16px;
 
   & + div {
     margin-top: 8px;
   }
+
+  ${({ isFocused, theme }) =>
+    isFocused &&
+    css`
+      color: ${theme.colors.active};
+      border-color: ${theme.colors.active};
+    `}
+
+  ${({ isFilled, theme }) =>
+    isFilled &&
+    css`
+      color: ${theme.colors.active};
+    `}
 
   input {
     flex: 1;
@@ -31,6 +49,5 @@ export const Container = styled.div`
 
   svg {
     margin-right: 16px;
-    color: ${({ theme }) => theme.colors.placeHolder};
   }
 `;
