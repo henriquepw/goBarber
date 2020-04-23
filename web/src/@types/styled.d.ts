@@ -9,6 +9,7 @@ declare module 'styled-components' {
       placeHolder: string;
       secundaryBackground: string;
       secundaryText: string;
+      error: string;
     };
   }
 }

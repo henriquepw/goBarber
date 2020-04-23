@@ -6,5 +6,6 @@ export default {
     placeHolder: '#666360',
     secundaryBackground: '#232129',
     secundaryText: '#f4ede8',
+    error: '#c53030',
   },
 };
