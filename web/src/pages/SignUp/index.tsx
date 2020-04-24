@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { FiArrowLeft, FiMail, FiLock, FiUser } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -9,19 +9,28 @@ import * as Yup from 'yup';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import api from '../../services/api';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
 import logoImg from '../../assets/logo.svg';
 import { useToast } from '../../hooks/toast';
 
+interface SignUpFormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
-    async (data: object) => {
+    async (data: SignUpFormData) => {
       try {
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'),
@@ -36,6 +45,16 @@ const SignUp: React.FC = () => {
         });
 
         formRef.current?.setErrors({});
+
+        await api.post('/users', data);
+
+        addToast({
+          type: 'success',
+          title: 'Cadastro realizado!',
+          description: 'Você já pode fazer seu logon no GoBarber!.',
+        });
+
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           formRef.current?.setErrors(getValidationErrors(err));
@@ -44,12 +63,12 @@ const SignUp: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+          title: 'Erro no cadastro',
+          description: 'Ocorreu um erro ao fazer cadastro :/, tente novamente.',
         });
       }
     },
-    [addToast],
+    [addToast, history],
   );
 
   return (
