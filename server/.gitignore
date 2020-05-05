@@ -1,5 +1,6 @@
 tmp/*
 !tmp/.gitkeep
+!tmp/uploads
 
 #vs code
 .vscode/
