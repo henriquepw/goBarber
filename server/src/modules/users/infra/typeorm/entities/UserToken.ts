@@ -4,24 +4,20 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Generated,
 } from 'typeorm';
 
-@Entity('users')
-class User {
+@Entity('users_tokes')
+class UserToken {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  name: string;
+  @Generated('uuid')
+  token: string;
 
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
-  @Column()
-  avatar: string;
+  @Column({ name: 'user_id' })
+  userId: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -30,4 +26,4 @@ class User {
   updatedAt: Date;
 }
 
-export default User;
+export default UserToken;
