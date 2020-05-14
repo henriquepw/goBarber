@@ -38,24 +38,18 @@ class MailgunMailProvider implements IMailProvider {
 
     const html = await this.mailTemplateProvider.parse(templateData);
 
-    try {
-      const info = await this.client.sendMail({
-        from: {
-          name: from?.name || name,
-          address: from?.email || email,
-        },
-        to: {
-          name: to.name,
-          address: to.email,
-        },
-        subject,
-        html,
-      });
-
-      console.log(info);
-    } catch (err) {
-      console.log(err);
-    }
+    await this.client.sendMail({
+      from: {
+        name: from?.name || name,
+        address: from?.email || email,
+      },
+      to: {
+        name: to.name,
+        address: to.email,
+      },
+      subject,
+      html,
+    });
   }
 }
 
