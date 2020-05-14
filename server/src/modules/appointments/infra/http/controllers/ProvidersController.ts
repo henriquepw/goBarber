@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListProvidersServices from '@modules/appointments/services/ListProvidersServices';
 
@@ -9,11 +10,9 @@ class ProvidersController {
 
     const providers = await listProviders.execute(req.user.id);
 
-    providers.forEach((_, index) => {
-      delete providers[index].password;
-    });
+    const response = providers.map(provider => classToClass(provider));
 
-    return res.json(providers);
+    return res.json(response);
   }
 }
 
