@@ -39,6 +39,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@types/redis": "^2.8.20",
     "bcryptjs": "^2.4.3",
     "celebrate": "^12.1.1",
     "class-transformer": "^0.2.3",
@@ -56,6 +57,8 @@
     "nodemailer": "^6.4.6",
     "nodemailer-mailgun-transport": "^2.0.0",
     "pg": "^8.0.2",
+    "rate-limiter-flexible": "^2.1.4",
+    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.1.0",
     "typeorm": "^0.2.24",
