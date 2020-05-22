@@ -26,9 +26,12 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointment;
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
+  public async findByDate(
+    date: Date,
+    providerId: string,
+  ): Promise<Appointment | undefined> {
     const findAppointment = await this.ormRepository.findOne({
-      where: { date },
+      where: { date, providerId },
     });
 
     return findAppointment;
