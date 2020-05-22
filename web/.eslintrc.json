@@ -31,6 +31,7 @@
   "rules": {
     "prettier/prettier": "error",
 
+    "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
