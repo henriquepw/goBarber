@@ -13,7 +13,7 @@ interface ITokenPayload {
 
 function ensureAuthenticated(
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction,
 ): void {
   const authHeader = req.headers.authorization;
