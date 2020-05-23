@@ -187,6 +187,11 @@ export const Section = styled.section`
     margin-bottom: 16px;
     border-bottom: 1px solid ${({ theme }) => theme.colors.card};
   }
+
+  > p {
+    color: ${({ theme }) => theme.colors.secundaryText};
+    opacity: 0.5;
+  }
 `;
 
 export const Appointment = styled.div`
