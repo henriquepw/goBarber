@@ -93,6 +93,8 @@ export const Schedule = styled.section`
     span {
       display: flex;
       align-items: center;
+
+      text-transform: capitalize;
     }
 
     span + span::before {
@@ -198,6 +200,7 @@ export const Appointment = styled.div`
   span {
     display: flex;
     align-items: center;
+    width: 70px;
 
     margin-left: auto;
     color: ${({ theme }) => theme.colors.primaryText};
