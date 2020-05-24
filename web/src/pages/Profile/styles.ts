@@ -86,9 +86,10 @@ export const AvatarInput = styled.div`
     border-radius: 50%;
   }
 
-  button {
+  label {
     display: flex;
-    place-content: center;
+    align-items: center;
+    justify-content: center;
 
     position: absolute;
     right: 0;
@@ -102,16 +103,21 @@ export const AvatarInput = styled.div`
 
     background: ${({ theme }) => theme.colors.active};
     transition: background 0.2s;
-
-    &:hover {
-      background: ${({ theme }) => shade(0.2, theme.colors.active)};
-    }
+    cursor: pointer;
 
     svg {
       width: 20px;
       height: 20px;
 
       color: ${({ theme }) => theme.colors.background};
+    }
+
+    input {
+      display: none;
+    }
+
+    &:hover {
+      background: ${({ theme }) => shade(0.2, theme.colors.active)};
     }
   }
 `;
