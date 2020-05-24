@@ -63,8 +63,13 @@ export const Profile = styled.div`
       color: ${({ theme }) => theme.colors.secundaryText};
     }
 
-    strong {
+    a {
       color: ${({ theme }) => theme.colors.active};
+      transition: color 0.3s;
+
+      &:hover {
+        color: ${({ theme }) => shade(0.3, theme.colors.active)};
+      }
     }
   }
 `;
