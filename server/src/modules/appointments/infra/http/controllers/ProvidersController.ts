@@ -10,9 +10,7 @@ class ProvidersController {
 
     const providers = await listProviders.execute(req.user.id);
 
-    const response = providers.map(provider => classToClass(provider));
-
-    return res.json(response);
+    return res.json(classToClass(providers));
   }
 }
 

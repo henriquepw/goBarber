@@ -4,6 +4,7 @@ import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICa
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import { classToClass } from 'class-transformer';
 
 @injectable()
 class ListProvidersService {
@@ -25,7 +26,7 @@ class ListProvidersService {
         exceptUserId,
       });
 
-      await this.cacheProvider.save(cacheKey, users);
+      await this.cacheProvider.save(cacheKey, classToClass(users));
     }
 
     return users;
