@@ -77,3 +77,31 @@ export const ProviderName = styled.Text<ProviderProps>`
 
   margin-left: 8px;
 `;
+
+export const Calendar = styled.View``;
+
+export const Title = styled.Text`
+  color: ${({ theme }) => theme.colors.secundaryText};
+
+  font-family: 'RobotoSlab-Medium';
+  font-size: 24px;
+
+  margin: 0 24px 24px;
+`;
+
+export const OpenDatePickerButton = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+
+  height: 46px;
+
+  background: ${({ theme }) => theme.colors.active};
+  margin: 0 24px;
+  border-radius: 10px;
+`;
+
+export const OpenDatePickerButtonText = styled.Text`
+  color: ${({ theme }) => theme.colors.secundaryBackground};
+  font-family: 'RobotoSlab-Medium';
+  font-size: 16px;
+`;
