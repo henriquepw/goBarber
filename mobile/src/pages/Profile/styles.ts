@@ -34,5 +34,12 @@ export const UserAvatar = styled.Image`
 `;
 
 export const SubmitButton = styled(Button)`
+  margin-bottom: 16px;
+`;
+
+export const SignOutButton = styled(Button)`
+  background: #b24444;
   margin-bottom: 32px;
+
+  height: 48px;
 `;
